@@ -24,9 +24,15 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 
 	auth := smtp.PlainAuth("", smtpUser, smtpPassword, smtpHost)
 
-	message := fmt.Sprintf("To: %s\r\nSubject: %s\r\n\r\n%s", recipient, subject, body)
+	headers := make([]byte, 0)
+	headers = append(headers, []byte(fmt.Sprintf("From: %s\r\n", smtpUser))...)
+	headers = append(headers, []byte(fmt.Sprintf("To: %s\r\n", recipient))...)
+	headers = append(headers, []byte(fmt.Sprintf("Subject: %s\r\n", subject))...)
+	headers = append(headers, []byte("\r\n")...)
 
-	err := smtp.SendMail(smtpHost+":"+smtpPort, auth, smtpUser, []string{recipient}, []byte(message))
+	message := append(headers, []byte(body)...)
+
+	err := smtp.SendMail(smtpHost+":"+smtpPort, auth, smtpUser, []string{recipient}, message)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
