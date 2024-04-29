@@ -5,10 +5,10 @@
   "author": "kythonlk",
   "license": "",
   "dependencies": {
-    "vercel": "^31.2.2"
+    "vercel": "^31.4.0"
   },
   "scripts": {
-    "setup": "npm vercel login && npm vercel link",
+    "setup": "vercel login && npm vercel link",
     "start": "npm vercel dev",
     "dev": "npm start"
   }
