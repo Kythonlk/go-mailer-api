@@ -1,0 +1,15 @@
+{
+  "name": "go-mailer-api",
+  "version": "1.0.0",
+  "repository": "https://github.com/kythonlk/go-mailer-api",
+  "author": "kythonlk",
+  "license": "",
+  "dependencies": {
+    "vercel": "^31.2.2"
+  },
+  "scripts": {
+    "setup": "npm vercel login && npm vercel link",
+    "start": "npm vercel dev",
+    "dev": "npm start"
+  }
+}
